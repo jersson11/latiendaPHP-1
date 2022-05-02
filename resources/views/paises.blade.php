@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" integrity="sha512-T584yQ/tdRR5QwOpfvDfVQUidzfgc2339Lc8uBDtcp/wYu80d7jwBgAxbyMh0a9YM9F8N3tdErpFI8iaGx6x5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <title>Document</title>
 </head>
-<body>
-    <h1>Paises de la región</h1>
-    <table class="table table-striped">
+<body class="bg-dark">
+    <h1 style="color:white"> Paises de la región</h1>
+    <table class="table table-striped bg-light">
         <thead>
             <tr>
                 <th>
@@ -24,26 +24,32 @@
                 <th>
                     Población
                 </th>
+                <th>
+                    Ciudades
+                </th>
             </tr>
         </thead>
         <tboby>
             @foreach($paises as $pais => $infopais)
             <tr>
-                <td>
+                <td rowspan='{{count($infopais["ciudades"]) }}'>
                     {{ $pais }}
                 </td>
-                <td>
+                <td rowspan='{{count($infopais["ciudades"]) }}' >
                     {{ $infopais ["capital"] }}
                 </td>
-                <td>
+                <td rowspan='{{count($infopais["ciudades"]) }}'>
                     {{ $infopais ["moneda"] }}
                 </td>
-                <td>
+                <td rowspan='{{count($infopais["ciudades"]) }}' >
                     {{ $infopais ["poblacion"] }}
                 </td>
-            
+                @foreach($infopais["ciudades"] as $ciudad)
 
+                    <td style="background-color: grey; color:white">{{$ciudad}} </td>
             </tr>
+                @endforeach
+           
             @endforeach
         </tboby>
         <tfoot></tfoot>
