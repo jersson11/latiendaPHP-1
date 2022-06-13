@@ -30,10 +30,10 @@ class ProductoController extends Controller
         $marcas= Marca::all();
         //seleccionar categorias:
         $categorias= categoria::all();
-
+  //las enviamos a la vista
        return view("productos.new") 
-        ->whith ("categorias", $categoria)
-        ->whith ("marcas", $marca);
+        ->with ("categorias", $categorias)
+        ->with ("marcas", $marcas);
     }
 
     /**
@@ -44,7 +44,30 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // acceder a los datos del formulario utilizando el objeto request
+      //  echo "<pre>";
+       // var_dump($request->imagen);
+       // echo "</pre>";
+
+       $archivo=$request->imagen;
+       //capturar metodo "original" del archivo
+       //desde el cliente
+       $nombre_archivo=$archivo->getClientOriginalName();
+       var_dump($nombre_archivo);
+      // mover el archivo a la carpeta "public/img"
+      $ruta = public_path();
+      var_dump($ruta);
+      $archivo->move("$ruta/img", $nombre_archivo);
+      //registrar producto
+      $producto = new producto;
+      $producto->nombre = $request->nombre;
+      $producto->descripcion = $request->desc;
+      $producto->precio = $request->precio;
+      $producto->imagen =$nombre_archivo;
+      $producto->marca_id = $request->marca;
+      $producto->categoria_id = $request->categoria;
+      $producto->save();
+      echo"producto registrado";
     }
 
     /**
@@ -55,7 +78,7 @@ class ProductoController extends Controller
      */
     public function show( $producto)
     {
-        echo "aqui va el detalle de producto con id: $profucto";
+        echo "aqui va el detalle de producto con id: $producto";
     }
 
     /**

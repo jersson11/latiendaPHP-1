@@ -5,25 +5,29 @@
     <h1 class="brown-text text-darken-4">Nuevo Producto</h1>
 </div>
 <div class="row">
-    <form action="" class="col s8" method="POST">
+    <form action="{{route('productos.store')}}" class="col s8" method="POST" enctype="multipart/form-data">
+        @csrf
         <div class="row">
             <div class="col s8 input-field">
-                <input  type="text" id="nombre" name="nombre" placeholder="Nombre Producto" />
+                <input  type="text" id="nombre" name="nombre" class="validate" placeholder="Nombre Producto" />
                 <label for="nombre">Nombre Producto</label>
             </div>
         </div>
+
         <div class="row">
             <div class="col s8 input-field">
                 <textarea name="desc" id="desc" class="materialize-textarea" placeholder="Descripcion Producto"></textarea>
                 <label for="desc">Descripción</label>
             </div>
         </div>
+
         <div class="row">
             <div class="col s8 input-field">
                 <input type="text" id="precio" name="precio" placeholder="Precio Producto">
                 <label for="precio">Precio Producto</label>
             </div>
         </div>
+
         <div class="row">
             <div class="col s8 file-field input-field">
                 <div class="btn"> 
@@ -35,6 +39,39 @@
             </div>
             </div>
         </div>
+        <div class="row"> 
+        <div class="col.s8.input-fiel"> 
+            <select name="marca" id="marca"> 
+            @foreach($marcas as $marca)
+            <option value="{{$marca->id}}">{{$marca->nombre}}</option>
+            <label>seleccione marca</label>
+            @endforeach
+            </select>
+        </div>
+        </div>
+
+        <div class="row"> 
+        <div class="col.s8.input-fiel"> 
+            <select name="categoria" id="categoria">
+                @foreach($categorias as $categoria)
+                            <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                            <label>seleccione categoria</label>
+                @endforeach
+            </select>
+            <label>seleccione categoria</label>
+           
+        </div>
+        </div>
+
+        <div class="row">
+
+        <button class="btn waves-effect waves-light" type="submit" name="action">guardar producto
+   
+
+    </div>
+
+  </button>
+
     </form>
 </div>
 @endsection

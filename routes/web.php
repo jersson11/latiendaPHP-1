@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 //dependencia al controlador
-use App\Http@\controllers;
+use App\Http\Controllers\productoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,10 +101,9 @@ Route:: get('paises', function(){
         ->with("paises", $paises );
 });
 
-Route:: get('prueba', function(){
-    return view('productos.new');
-} 
+Route:: get('new', function(){
+    return view('productos/new');
+}); 
 //rutas REST //
-route::resource("productos",productoController::class);
+Route::resource("productos", ProductoController::class);
 
-);
