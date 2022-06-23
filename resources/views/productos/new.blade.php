@@ -1,6 +1,12 @@
 @extends('layouts.menu')
 
 @section('contenido')
+@if(session('mensajito'))
+<div class="row">
+    <p>{{session('mensajito')}}</p>
+
+</div>
+@endif
 <div class="row">
     <h1 class="brown-text text-darken-4">Nuevo Producto</h1>
 </div>
@@ -11,6 +17,7 @@
             <div class="col s8 input-field">
                 <input  type="text" id="nombre" name="nombre" class="validate" placeholder="Nombre Producto" />
                 <label for="nombre">Nombre Producto</label>
+                <strong>{{$errors->first('nombre')}}</strong>
             </div>
         </div>
 
@@ -18,6 +25,7 @@
             <div class="col s8 input-field">
                 <textarea name="desc" id="desc" class="materialize-textarea" placeholder="Descripcion Producto"></textarea>
                 <label for="desc">Descripción</label>
+                <strong>{{$errors->first('desc')}}</strong>
             </div>
         </div>
 
@@ -25,6 +33,7 @@
             <div class="col s8 input-field">
                 <input type="text" id="precio" name="precio" placeholder="Precio Producto">
                 <label for="precio">Precio Producto</label>
+                <strong>{{$errors->first('precio')}}</strong>
             </div>
         </div>
 
@@ -33,6 +42,8 @@
                 <div class="btn"> 
                 <span>Imagen Del Producto</span>
                 <input type="file" name="imagen" />
+                <strong>{{$errors->first('imagen')}}</strong>
+
              </div>
             <div class="file-path-wrapper">
                 <input type="text" class="file-path">
@@ -53,9 +64,11 @@
         <div class="row"> 
         <div class="col.s8.input-fiel"> 
             <select name="categoria" id="categoria">
+                <option value=""> seleccione categoria</option>
                 @foreach($categorias as $categoria)
                             <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
                             <label>seleccione categoria</label>
+                            <strong>{{$errors->first('categoria')}}</strong>
                 @endforeach
             </select>
             <label>seleccione categoria</label>
